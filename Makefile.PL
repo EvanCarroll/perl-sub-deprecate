@@ -9,7 +9,7 @@ my %WriteMakefileArgs = (
     VERSION_FROM     => 'lib/Sub/Deprecate.pm',
     ABSTRACT_FROM    => 'lib/Sub/Deprecate.pm',
     LICENSE          => 'artistic_2',
-    MIN_PERL_VERSION => '5.006',
+    MIN_PERL_VERSION => '5.020',
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => '0',
     },
@@ -17,9 +17,27 @@ my %WriteMakefileArgs = (
         'Test::More' => '0',
     },
     PREREQ_PM => {
+			'parent' => '0'
         #'ABC'              => '1.6',
         #'Foo::Bar::Module' => '5.0401',
     },
+  META_MERGE   => {
+    dynamic_config => 0,
+    'meta-spec'    => {version   => 2},
+    no_index       => {directory => [qw(examples t)] },
+    prereqs        => {runtime   => {requires => {perl => '5.016'}}},
+    resources      => {
+      bugtracker => {web => 'https://github.com/EvanCarroll/perl-sub-deprecate/issues'},
+      homepage   => 'https://github.com/EvanCarroll/perl-sub-deprecate',
+      license    => ['http://www.opensource.org/licenses/artistic-license-2.0'],
+      repository => {
+        type => 'git',
+        url  => 'https://github.com/EvanCarroll/perl-sub-deprecate.git',
+        web  => 'https://github.com/EvanCarroll/perl-sub-deprecate',
+      },
+    },
+  },
+
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Sub-Deprecate-*' },
 );
