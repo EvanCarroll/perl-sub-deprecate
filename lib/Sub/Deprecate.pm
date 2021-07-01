@@ -155,6 +155,8 @@ L<https://metacpan.org/release/Sub-Deprecate>
 
 =head1 ACKNOWLEDGEMENTS
 
+This module was inspired by the blog post here L<https://phoenixtrap.com/2021/06/29/gradual-method-renaming-in-perl/> by Mark Gardner.
+
 
 =head1 LICENSE AND COPYRIGHT
 
