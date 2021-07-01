@@ -7,6 +7,8 @@ use v5.20;
 use strict;
 use warnings;
 
+our $VERSION = '0.02';
+
 use experimental "signatures";
 
 sub _cb_rename ($from, $to) {
@@ -68,36 +70,24 @@ __END__
 
 =head1 NAME
 
-Sub::Deprecate - Assists in providing deprecation notices to subs
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
-
+Sub::Deprecate - Enables runtime graceful deprecation notices on sub calls
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+This module will assist in providing a more graceful deprecation when you
+can't control all your users.
 
-Perhaps a little code snippet.
-
-
-		use experimental 'signatures';
+    use experimental 'signatures';
     use Sub::Deprecate qw(sub_rename_with sub_trigger_once_with);
-
+    
     sub foo { 7 };
-		sub_trigger_once_with( __PACKAGE__, 'foo', sub ($target) { warn "Triggered!" } );
-		# foo() # will trigger cb event
-
-
-		sub fancy_new { 7 }
-		sub_rename_with( __PACKAGE__, 'old_and_deprecated', 'fancy_new', sub ($old, $new) { warn "sub old_and_deprecated is deprecated" } );
-		old_and_deprecated() # will warn and redirect to fancy_new
-    ...
+    sub_trigger_once_with( __PACKAGE__, 'foo', sub ($target) { warn "Triggered!" } );
+    # foo() # will trigger cb event
+    
+    
+    sub fancy_new { 7 }
+    sub_rename_with( __PACKAGE__, 'old_and_deprecated', 'fancy_new', sub ($old, $new) { warn "sub old_and_deprecated is deprecated" } );
+    old_and_deprecated() # will warn and redirect to fancy_new
 
 =head1 EXPORT
 

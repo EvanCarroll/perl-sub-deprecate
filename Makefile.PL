@@ -15,6 +15,7 @@ my %WriteMakefileArgs = (
     },
     TEST_REQUIRES => {
         'Test::More' => '0',
+        'Exporter'   => '0',
     },
     PREREQ_PM => {
 			'parent' => '0'
