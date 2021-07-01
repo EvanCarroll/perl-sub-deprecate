@@ -85,9 +85,18 @@ Quick summary of what the module does.
 
 Perhaps a little code snippet.
 
-    use Sub::Deprecate;
 
-    my $foo = Sub::Deprecate->new();
+		use experimental 'signatures';
+    use Sub::Deprecate qw(sub_rename_with sub_trigger_once_with);
+
+    sub foo { 7 };
+		sub_trigger_once_with( __PACKAGE__, 'foo', sub ($target) { warn "Triggered!" } );
+		# foo() # will trigger cb event
+
+
+		sub fancy_new { 7 }
+		sub_rename_with( __PACKAGE__, 'old_and_deprecated', 'fancy_new', sub ($old, $new) { warn "sub old_and_deprecated is deprecated" } );
+		old_and_deprecated() # will warn and redirect to fancy_new
     ...
 
 =head1 EXPORT
@@ -97,16 +106,16 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 sub_rename_with($pkg, $from, $to, $cb($from,$to))
+=head2 sub_rename_with($pkg, $from, $to, &cb($from,$to))
 
 Allows you to rename a function. Typically this is done when an
 old and deprecated function is moved elsewhere and you wish to retain the old
 name. A further callback can be provided which will received the name of the
 old function, and the new function.
 
-=head2 sub_trigger_once_with($pkg, $target, $cb($target))
+=head2 sub_trigger_once_with($pkg, $target, &cb($target))
 
-Allows you to trigger a call back when a remote function is called.
+Allows you to trigger a callback when a remote function is called.
 
 =head1 AUTHOR
 
